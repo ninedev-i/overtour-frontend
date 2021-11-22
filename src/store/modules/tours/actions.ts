@@ -6,7 +6,7 @@ import { ToursState } from './types';
 export default <ActionTree<ToursState, any>> {
    async getRegions({ commit }) {
       return Api
-         .get('get_regions')
+         .get('regions')
          .then(({ data }) => {
             commit('setRegions', data);
          });
@@ -27,7 +27,7 @@ export default <ActionTree<ToursState, any>> {
       };
 
       return Api
-         .get('get_tours', { params })
+         .get('tour', { params })
          .then(({ data }) => {
             commit('setTours', data);
          }, (error) => {

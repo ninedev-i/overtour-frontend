@@ -62,7 +62,7 @@ defineComponent({
 });
 
 const route = useRoute();
-const { title, description, date_from, date_to, price, link } = await Api.get(`get_tour/${route.params.id}`).then(res => res.data);
+const { title, description, date_from, date_to, price, link } = await Api.get(`tour/${route.params.id}`).then(res => res.data);
 
 useHead({
    title

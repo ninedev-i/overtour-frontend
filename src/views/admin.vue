@@ -120,7 +120,7 @@ const getData = async (clubId: number) => {
    tours.value = [];
    dataLoadingId.value = clubId;
    const data = await Api
-      .post('crawler/get_club_tours', {club: clubId})
+      .post('crawler/club_tours', {club: clubId})
       .then((res) => res.data);
 
    tours.value = data.tours;
@@ -144,7 +144,7 @@ const parseTour = async (tourInfo: IDraftData) => {
    tourInfo.type = null;
 
    return Api
-      .post('crawler/get_tour_detail', { tourInfo })
+      .post('crawler/tour_detail', { tourInfo })
       .then(({data}) => {
          tours.value = tours.value.slice(0).map((item) => {
             if (item && item.id === data.id) {
@@ -157,7 +157,7 @@ const parseTour = async (tourInfo: IDraftData) => {
 
 const showAllDrafts = async (): Promise<void> => {
    dataLoadingId.value = 'all';
-   tours.value = await Api.get('get_all_drafts').then(res => res.data);
+   tours.value = await Api.get('drafts').then(res => res.data);
    dataLoadingId.value = null;
 };
 </script>
