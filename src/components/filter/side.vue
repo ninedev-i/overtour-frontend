@@ -88,6 +88,10 @@ const priceMarks = ref({
       flex-direction: column;
       width: inherit;
       height: auto;
+
+      @media (max-width: 450px) {
+         position: relative;
+      }
    }
 
    &-container {
@@ -104,7 +108,8 @@ const priceMarks = ref({
       margin: 0 10px;
    }
 }
-   // Перебьем стили кнопок
+
+// Перебьем стили кнопок
 .el {
    &-switch__label.is-active {
       color: var(--main-color) !important;

@@ -3,16 +3,17 @@
       <menu-header />
       <page :white-page="false">
          <template #content>
-            <main>
-               <div :class="view === 'tile' ? 'tours-tile' : ''">
+            <main class="tours-container">
+               <div v-if="tours.length" :class="view === 'tile' ? 'tours-tile' : ''">
                   <article v-for="(tour, i) in tours" :key="`event_${i}`" class="tour">
                      <list-view v-if="view === 'list'" :tour="tour" />
                      <tile-view v-else :tour="tour" />
                   </article>
-                  <div v-if="!tours || !tours.length" class="tours-listEmpty">
-                     <h3>По вашему запросу ничего не найдено</h3>
-                     <p>Попробуйте изменить параметры фильтрации</p>
-                  </div>
+               </div>
+
+               <div v-if="!tours || !tours.length" class="tours-listEmpty">
+                  <h3>По вашему запросу ничего не найдено</h3>
+                  <p>Попробуйте изменить параметры фильтрации</p>
                </div>
             </main>
          </template>
@@ -60,23 +61,8 @@ const toggleView = () => {
 
 <style lang="scss">
 .tours {
-   // TODO: Перенести эту логику внутрь дочернего компонент
-   &-tile {
-      .tour {
-         display: inline-block;
-         height: 310px;
-         vertical-align: top;
-         margin-bottom: 14px;
-         margin-right: 21px;
-
-         &:nth-child(4n + 1) {
-            margin-right: 22px;
-         }
-
-         &:nth-child(4n + 4) {
-            margin-right: 0;
-         }
-      }
+   &-container {
+      margin: 0 auto;
    }
 
    &-listEmpty {
@@ -85,6 +71,23 @@ const toggleView = () => {
 
       h3 {
          margin-bottom: 12px;
+      }
+   }
+
+   &-tile {
+      box-sizing: border-box;
+      display: grid;
+      grid-gap: 20px;
+      grid-template-columns: repeat(3, 1fr);
+      min-height: 100vh;
+      place-content: center right;
+
+      @media (max-width: 1000px) {
+         grid-template-columns: repeat(2, 1fr);
+      }
+
+      @media (max-width: 750px) {
+         grid-template-columns: repeat(1, 1fr);
       }
    }
 }

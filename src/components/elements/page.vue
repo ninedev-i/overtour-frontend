@@ -47,11 +47,19 @@ const props = defineProps({
       margin-top: 75px;
       flex-direction: row;
       justify-content: center;
-      width: 100%;
+
+      @media (min-width: 400px) {
+         margin: 75px 30px;
+      }
+
+      @media (max-width: 450px) {
+         flex-direction: column-reverse;
+      }
    }
 
    &-content {
-      width: 1024px;
+      display: flex;
+      flex-grow: 1;
 
       h1 {
          font-size: 22px;
@@ -74,9 +82,15 @@ const props = defineProps({
 
    &-side {
       width: 240px;
-      margin-left: 12px;
+      min-width: 240px;
+      margin-left: 20px;
       display: flex;
       flex-direction: column;
+
+      @media (max-width: 450px) {
+         margin: 0 0 20px 0;
+         width: 100%;
+      }
    }
 }
 </style>

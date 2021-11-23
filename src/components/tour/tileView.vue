@@ -49,10 +49,9 @@ const triads = (amount: number) => {
 
 .tileView {
    display: inline-block;
-   width: 240px !important;
+   width: 100%;
    height: 310px;
    background-color: var(--page-background);
-   margin-bottom: 20px;
    text-decoration: none;
    color: var(--text-color);
 

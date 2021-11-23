@@ -100,6 +100,8 @@ const getPricePerDay = (price: number, days: number): string => {
    }
 
    &__description {
+      max-height: 106px;
+      overflow: hidden;
       margin-top: 6px;
    }
 
