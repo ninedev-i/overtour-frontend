@@ -1,15 +1,17 @@
 <template>
    <router-link :to="`/tours/${props.tour.id}`" :class="`tileView ${isClosed ? 'closed' : ''}`">
-      <div class="tileView__image" :title="props.tour.title" :style="`background-image: url(${props.tour.image})`"></div>
+      <img
+         class="tileView__image"
+         :src="props.tour.image"
+         :alt="props.tour.title"
+         loading="lazy"
+      />
       <div class="tileView__title">{{ props.tour.title }}</div>
       <div class="tileView__info">
-         <!--<div class="tileView__label">Даты похода:</div>-->
-         <div>
-            <span>{{ period(props.tour.date_from, props.tour.date_to) }} ({{ props.tour.duration }} {{ declOfNum(props.tour.duration) }})</span>
+         <div class="tileView__dates">
+            {{ period(props.tour.date_from, props.tour.date_to) }} ({{ props.tour.duration }} {{ declOfNum(props.tour.duration) }})
          </div>
-         <!--<hr />-->
-         <!--<div class="tileView__label">Стоимость:</div>-->
-         <div>{{ triads(props.tour.price) }} ₽</div>
+         <div class="tileView__price">{{ triads(props.tour.price) }} ₽</div>
       </div>
    </router-link>
 </template>
@@ -40,7 +42,7 @@ const declOfNum = (number: number) => {
 
 const triads = (amount: number) => {
    const val = amount + '';
-   return val.replace(/(\d{1,3})(?=((\d{3})*([^\d]|$)))/g, ' $1 ');
+   return val.replace(/(\d{1,3})(?=((\d{3})*([^\d]|$)))/g, ' $1 ').trim();
 };
 </script>
 
@@ -67,12 +69,9 @@ const triads = (amount: number) => {
    }
 
    &__image {
-      height: 160px;
       width: 100%;
-      background-size: cover;
-      background-position: center;
-      position: relative;
-      flex-shrink: 0;
+      height: 160px;
+      object-fit: cover;
    }
 
    &__title {
@@ -91,8 +90,9 @@ const triads = (amount: number) => {
       color: #868686;
    }
 
-   div {
-      margin-bottom: 6px;
+   &__dates,
+   &__price {
+      margin-top: 6px;
    }
 }
 </style>

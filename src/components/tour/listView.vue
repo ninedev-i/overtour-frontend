@@ -1,6 +1,11 @@
 <template>
    <router-link :to="`/tours/${props.tour.id}`" :class="`listView ${isClosed ? 'closed' : ''}`">
-      <div class="listView__image" :title="props.tour.title" :style="`background-image: url(${props.tour.image})`"></div>
+      <img
+         class="listView__image"
+         :src="props.tour.image"
+         :alt="props.tour.title"
+         loading="lazy"
+      />
       <div class="listView__text">
          <div class="listView__title">{{ props.tour.title }}</div>
          <div class="listView__description">{{ props.tour.description }}</div>
