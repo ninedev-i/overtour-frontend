@@ -5,6 +5,8 @@ export interface ToursState {
       period: Date[];
       tags: string | null;
       region: string | null;
+      price: [number, number] | null;
+      duration: [number, number] | null;
    };
    directions: Direction[];
 }

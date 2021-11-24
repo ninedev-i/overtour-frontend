@@ -18,7 +18,6 @@
          <el-slider
             v-model="duration"
             class="filterSide-item filterSide-slider"
-            :marks="durationMarks"
             :range="true"
             :min="1"
             :max="60"
@@ -34,7 +33,6 @@
             :min="0"
             :max="100000"
             :step="500"
-            :marks="priceMarks"
          />
 
          <!--<b>Набор</b><br />
@@ -49,12 +47,20 @@
             :colors="['#99A9BF', '#F7BA2A', '#FF9900']">
          </el-rate>-->
          <!--Турклуб-->
+         <el-button
+            class="filterSide-button"
+            :disabled="!isPriceChanged && !isDurationChanged"
+            @click="searchEvents"
+         >
+            Применить фильтр
+         </el-button>
       </div>
    </div>
 </template>
 
 <script lang="ts" setup>
-import { defineComponent, ref } from 'vue';
+import { computed, defineComponent, ref } from 'vue';
+import { useStore } from 'vuex';
 
 defineComponent({
    name: 'FilterSide',
@@ -65,17 +71,19 @@ const props = defineProps({
    view: String
 });
 
+const store = useStore();
+
 const duration = ref([1, 60]);
-const durationMarks = {
-   // 1: '1 дн',
-   // 60: '60 дн'
-};
 const price = ref([0, 100000]);
-const priceMarks = ref({
-   // 0: '0 руб'
-});
-// const difficulty = ref(1);
-// const checked = ref(true);
+const isPriceChanged = computed(() => JSON.stringify(store.state.tour.filter.price) !== JSON.stringify(price.value));
+const isDurationChanged = computed(() => JSON.stringify(store.state.tour.filter.duration) !== JSON.stringify(duration.value));
+
+const searchEvents = async () => {
+   store.commit('tour/setFilterPrice', price.value);
+   store.commit('tour/setFilterDuration', duration.value);
+
+   await store.dispatch('tour/getTours');
+};
 </script>
 
 <style lang="scss">
@@ -106,6 +114,10 @@ const priceMarks = ref({
 
    &-slider {
       margin: 0 10px;
+   }
+
+   &-button {
+      margin: 10px auto;
    }
 }
 

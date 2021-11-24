@@ -60,6 +60,7 @@ const props = defineProps({
    &-content {
       display: flex;
       flex-grow: 1;
+      max-width: 1000px;
 
       h1 {
          font-size: 22px;

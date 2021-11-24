@@ -18,6 +18,14 @@ export default <MutationTree<ToursState>> {
       state.filter.period = period;
    },
 
+   setFilterPrice(state, price) {
+      state.filter.price = price;
+   },
+
+   setFilterDuration(state, duration) {
+      state.filter.duration = duration;
+   },
+
    setTours(state, data) {
       state.tours = data;
    },

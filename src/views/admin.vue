@@ -3,70 +3,78 @@
       <menu-header />
       <page :white-page="true" :padding="true">
          <template #content>
-            <h1>Админка</h1>
-            <el-button-group>
-               <el-button size="mini" :loading="dataLoadingId === 1" @click="getData(1)">Получить данные strannik</el-button>
-               <el-button size="mini" :loading="dataLoadingId === 2" @click="getData(2)">Получить данные vpoxod</el-button>
-               <el-button size="mini" :loading="dataLoadingId === 3" @click="getData(3)">Получить данные perexod</el-button>
-               <el-button size="mini" :loading="dataLoadingId === 4" @click="getData(4)">Получить данные pik</el-button>
-               <el-button size="mini" :loading="dataLoadingId === 5" @click="getData(5)">Получить данные myway</el-button>
-               <el-button size="mini" :loading="dataLoadingId === 'all'" type="success" @click="showAllDrafts()">показать все черновики</el-button>
-            </el-button-group>
+            <div>
+               <h1>Админка</h1>
+               <div>
+                  <span>Парсить клуб </span>
+                  <el-button-group>
+                     <el-button :loading="dataLoadingId === 1" @click="getData(1)">Strannik</el-button>
+                     <el-button :loading="dataLoadingId === 2" @click="getData(2)">Vpoxod</el-button>
+                     <el-button :loading="dataLoadingId === 3" @click="getData(3)">Perexod</el-button>
+                     <el-button :loading="dataLoadingId === 4" @click="getData(4)">Pik</el-button>
+                     <el-button :loading="dataLoadingId === 5" @click="getData(5)">MyWay</el-button>
+                     <el-button :loading="dataLoadingId === 'all'" type="success" @click="showAllDrafts()">показать все черновики</el-button>
+                  </el-button-group>
+               </div>
+               <br />
 
-            <el-table
-               :data="tours"
-               stripe
-               style="width: 100%"
-               empty-text="Тут пусто"
-            >
-               <el-table-column
-                  type="index"
-                  label="№"
-                  :index="indexMethod"
-               />
-               <el-table-column
-                  prop="title"
-                  label="Заголовок"
-               />
-               <el-table-column
-                  label="C"
-                  width="140"
+               <el-button @click="parseAllData(1)">Детализировать</el-button>
+
+               <el-table
+                  :data="tours"
+                  stripe
+                  style="width: 100%"
+                  empty-text="Тут пусто"
                >
-                  <template #default="scope">
-                     {{ formatDate(scope.row.date_from).format('D MMMM YYYY') }}
-                  </template>
-               </el-table-column>
-               <el-table-column
-                  label="По"
-                  width="140"
-               >
-                  <template #default="scope">
-                     {{ formatDate(scope.row.date_to).format('D MMMM YYYY') }}
-                  </template>
-               </el-table-column>
-               <el-table-column
-                  label="Ссылка"
-               >
-                  <template #default="scope">
-                     <a :href="scope.row.link" target="_blank" class="admin-table__link">{{ scope.row.link }}</a>
-                  </template>
-               </el-table-column>
-               <el-table-column
-                  align="right"
-                  width="120"
-               >
-                  <template #default="scope">
-                     <el-button
-                        size="mini"
-                        :disabled="scope.row.type !== 'draft'"
-                        :loading="!scope.row.type"
-                        @click="parseTour(scope.row)"
-                     >
-                        {{ scope.row.type === 'added' ? 'Готово' : 'Парсить' }}
-                     </el-button>
-                  </template>
-               </el-table-column>
-            </el-table>
+                  <el-table-column
+                     type="index"
+                     label="№"
+                     :index="indexMethod"
+                  />
+                  <el-table-column
+                     prop="title"
+                     label="Заголовок"
+                  />
+                  <el-table-column
+                     label="C"
+                     width="140"
+                  >
+                     <template #default="scope">
+                        {{ formatDate(scope.row.date_from).format('D MMMM YYYY') }}
+                     </template>
+                  </el-table-column>
+                  <el-table-column
+                     label="По"
+                     width="140"
+                  >
+                     <template #default="scope">
+                        {{ formatDate(scope.row.date_to).format('D MMMM YYYY') }}
+                     </template>
+                  </el-table-column>
+                  <el-table-column
+                     label="Ссылка"
+                  >
+                     <template #default="scope">
+                        <a :href="scope.row.link" target="_blank" class="admin-table__link">{{ scope.row.link }}</a>
+                     </template>
+                  </el-table-column>
+                  <el-table-column
+                     align="right"
+                     width="120"
+                  >
+                     <template #default="scope">
+                        <el-button
+                           size="mini"
+                           :disabled="scope.row.type !== 'draft'"
+                           :loading="!scope.row.type"
+                           @click="parseTour(scope.row)"
+                        >
+                           {{ scope.row.type === 'added' ? 'Готово' : 'Парсить' }}
+                        </el-button>
+                     </template>
+                  </el-table-column>
+               </el-table>
+            </div>
          </template>
       </page>
    </div>
@@ -127,17 +135,6 @@ const getData = async (clubId: number) => {
    report.value = data.report;
 
    dataLoadingId.value = null;
-   // let message = `<b>найдено</b>: ${report.value.found}<br /> <b>добавлено</b>: ${report.value.unique}`;
-   if (report.value.broken) {
-      // message += `<br /><b>с ошибками</b>: ${report.value.broken}`;
-   }
-   // Notification.success({
-   //    title: '',
-   //    dangerouslyUseHTMLString: true,
-   //    message,
-   //    position: 'bottom-right',
-   //    duration: 0
-   // })
 };
 
 const parseTour = async (tourInfo: IDraftData) => {
@@ -153,6 +150,11 @@ const parseTour = async (tourInfo: IDraftData) => {
             return item;
          });
       });
+};
+
+const parseAllData = async (clubId: number) => {
+   return Api
+      .post('crawler/parse_details_by_club', { clubId });
 };
 
 const showAllDrafts = async (): Promise<void> => {

@@ -20,9 +20,17 @@ export default <ActionTree<ToursState, any>> {
             date_to: formatDate(state.filter.period[1]).format('YYYY-MM-D'),
          };
       }
+
+      const initPrice = [0, 100000];
+      const filterPrice = state.filter.price && JSON.stringify(state.filter.price) !== JSON.stringify(initPrice)
+         ? JSON.stringify(state.filter.price)
+         : null;
+
       const params = {
          tags: state.filter.tags,
          region: state.filter.region,
+         price: filterPrice,
+         duration: state.filter.duration ? JSON.stringify(state.filter.duration) : null,
          ...periodFilter
       };
 

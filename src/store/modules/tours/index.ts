@@ -11,6 +11,8 @@ const state: ToursState = {
       period: [],
       tags: null,
       region: null,
+      price: [0, 100000],
+      duration: [1, 60],
    },
    directions: [
       { value: 'weekend', caption: 'Выходного дня' },
