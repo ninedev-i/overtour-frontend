@@ -26,11 +26,16 @@ export default <ActionTree<ToursState, any>> {
          ? JSON.stringify(state.filter.price)
          : null;
 
+      const initDuration = [1, 60];
+      const filterDuration = state.filter.duration && JSON.stringify(state.filter.duration) !== JSON.stringify(initDuration)
+         ? JSON.stringify(state.filter.duration)
+         : null;
+
       const params = {
          tags: state.filter.tags,
          region: state.filter.region,
          price: filterPrice,
-         duration: state.filter.duration ? JSON.stringify(state.filter.duration) : null,
+         duration: filterDuration,
          ...periodFilter
       };
 
