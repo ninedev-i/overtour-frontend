@@ -32,6 +32,7 @@ export default <ActionTree<ToursState, any>> {
          : null;
 
       const params = {
+         page: state.filter.page,
          tags: state.filter.tags,
          region: state.filter.region,
          price: filterPrice,

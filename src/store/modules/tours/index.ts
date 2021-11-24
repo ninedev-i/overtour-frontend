@@ -8,6 +8,7 @@ const state: ToursState = {
    regions: [],
    tours: [],
    filter: {
+      page: 1,
       period: [],
       tags: null,
       region: null,

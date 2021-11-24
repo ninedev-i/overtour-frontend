@@ -2,8 +2,8 @@ import { MutationTree } from 'vuex';
 import { ToursState } from './types';
 
 export default <MutationTree<ToursState>> {
-   setFilter(state, filter = '') {
-      state.filter = filter;
+   setFilterPage(state, page) {
+      state.filter.page = page;
    },
 
    setFilterTags(state, tags = '') {

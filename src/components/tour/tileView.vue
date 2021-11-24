@@ -53,7 +53,7 @@ const triads = (amount: number) => {
    display: inline-block;
    width: 100%;
    max-width: 320px;
-   height: 310px;
+   height: 280px;
    background-color: var(--page-background);
    text-decoration: none;
    color: var(--text-color);
@@ -70,8 +70,12 @@ const triads = (amount: number) => {
 
    &__image {
       width: 100%;
+      min-width: 100%;
       height: 160px;
+      min-height: 160px;
       object-fit: cover;
+      text-align: center;
+      background: #e4e4e4;
    }
 
    &__title {

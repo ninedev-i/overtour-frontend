@@ -2,6 +2,7 @@ export interface ToursState {
    regions: string[];
    tours: Tour[];
    filter: {
+      page: number;
       period: Date[];
       tags: string | null;
       region: string | null;

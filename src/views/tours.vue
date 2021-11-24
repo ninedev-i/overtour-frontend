@@ -11,6 +11,16 @@
                   </article>
                </div>
 
+               <el-pagination
+                  v-model:currentPage="currentPage"
+                  :page-size="40"
+                  :total="meta.total"
+                  class="tours-pagination"
+                  hide-on-single-page
+                  layout="prev, pager, next"
+                  @current-change="handleCurrentChange"
+               />
+
                <div v-if="!tours || !tours.length" class="tours-listEmpty">
                   <h3>По вашему запросу ничего не найдено</h3>
                   <p>Попробуйте изменить параметры фильтрации</p>
@@ -46,9 +56,15 @@ useHead({
 
 const store = useStore();
 const route = useRoute();
-const tours = computed(() => store.state.tour.tours);
-
 const view = ref('tile');
+const tours = computed(() => store.state.tour.tours.data);
+const meta = computed(() => store.state.tour.tours.meta);
+
+const currentPage = computed(() => meta.value.current_page);
+const handleCurrentChange = async (page: number) => {
+   store.commit('tour/setFilterPage', page);
+   await store.dispatch('tour/getTours');
+};
 
 if (route.params.previousPage !== 'home') {
    await store.dispatch('tour/getTours');
@@ -65,6 +81,11 @@ const toggleView = () => {
       margin: 0 auto;
    }
 
+   &-pagination {
+      float: right;
+      margin-top: 40px;
+   }
+
    &-listEmpty {
       text-align: center;
       margin: 10px;
@@ -79,7 +100,6 @@ const toggleView = () => {
       display: grid;
       grid-gap: 20px;
       grid-template-columns: repeat(3, 1fr);
-      min-height: 100vh;
       place-content: center right;
 
       @media (max-width: 1000px) {
