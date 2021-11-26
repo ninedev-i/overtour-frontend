@@ -136,15 +136,17 @@ const searchEvents = async () => {
          background-color: var(--main-color-active) !important;
       }
    }
+
+   .el {
+      &-input__inner {
+         border-radius: 0;
+         border-bottom: 0;
+      }
+   }
 }
 
 /* Переопределим стили компонентов */
 .el {
-   &-input__inner {
-      border-radius: 0;
-      border-bottom: 0;
-   }
-
    &-select-dropdown__item.selected {
       color: var(--main-color-hover);
    }

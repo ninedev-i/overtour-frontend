@@ -10,15 +10,15 @@ import ru from 'element-plus/lib/locale/lang/ru';
 import 'element-plus/lib/theme-chalk/index.css';
 
 const head = createHead();
-const router = createRouter();
 const store = createStore();
+const router = createRouter(store);
 sync(store, router);
 
 const app = createApp(App);
 app
    .use(head)
-   .use(router)
    .use(store)
+   .use(router)
    .use(el, { locale: ru, weekStart: 3 });
 
 router.beforeResolve((to, from, next) => {

@@ -1,6 +1,7 @@
 import { RouteLocationNormalized, RouteLocationNormalizedLoaded } from 'vue-router';
 import { createStore, DispatchOptions, Store, useStore as vuexUseStore } from 'vuex';
 import tour from './modules/tours';
+import user from './modules/user';
 
 interface IRouterExtends extends RouteLocationNormalized {
    from: RouteLocationNormalizedLoaded;
@@ -23,7 +24,8 @@ export default () => {
    const store = createStore<IRootState>({
       modules: {
          tour: tour(),
-      }
+         user: user(),
+      },
    });
 
    return storeDispatchWarp(store);
