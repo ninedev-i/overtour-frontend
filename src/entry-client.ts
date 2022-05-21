@@ -11,7 +11,7 @@ import 'element-plus/lib/theme-chalk/index.css';
 
 const head = createHead();
 const store = createStore();
-const router = createRouter(store);
+const router = createRouter(/* store */);
 sync(store, router);
 
 const app = createApp(App);

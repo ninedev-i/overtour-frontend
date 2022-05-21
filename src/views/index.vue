@@ -7,13 +7,8 @@
 </template>
 
 <script lang="ts" setup>
-import { defineComponent } from 'vue';
 import { useHead } from '@vueuse/head';
 import FilterLine from '@/components/filter/line.vue';
-
-defineComponent({
-   name: 'Home'
-});
 
 useHead({
    title: 'Overtour',

@@ -59,12 +59,8 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, defineComponent, ref } from 'vue';
+import { computed, ref } from 'vue';
 import { useStore } from 'vuex';
-
-defineComponent({
-   name: 'FilterSide',
-});
 
 const props = defineProps({
    changeView: Function,

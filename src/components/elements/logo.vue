@@ -2,14 +2,6 @@
    <router-link to="/" class="logo">Overtour</router-link>
 </template>
 
-<script lang="ts" setup>
-import { defineComponent } from 'vue';
-
-defineComponent({
-   name: 'Logo'
-});
-</script>
-
 <style lang="scss">
 .logo {
    color: #fff;

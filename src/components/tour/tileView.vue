@@ -17,12 +17,8 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, defineComponent } from 'vue';
+import { computed } from 'vue';
 import { period } from '@/utils/date';
-
-defineComponent({
-   name: 'TileView',
-});
 
 const props = defineProps({
    tour: {

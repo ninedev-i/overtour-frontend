@@ -33,12 +33,8 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, defineComponent } from 'vue';
+import { computed } from 'vue';
 import { formatDate } from '@/utils/date';
-
-defineComponent({
-   name: 'ListView',
-});
 
 const props = defineProps({
    tour: {

@@ -25,12 +25,8 @@
 </template>
 
 <script lang="ts" setup>
-import { defineComponent, ref } from 'vue';
+import { ref } from 'vue';
 import { useStore } from 'vuex';
-
-defineComponent({
-   name: 'AuthForm',
-});
 
 const store = useStore();
 const auth = ref({

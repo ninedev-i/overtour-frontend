@@ -81,16 +81,12 @@
 </template>
 
 <script lang="ts" setup>
-import { defineComponent, ref } from 'vue';
+import { ref } from 'vue';
+import { useHead } from '@vueuse/head';
 import MenuHeader from '@/components/elements/header.vue';
 import Page from '@/components/elements/page.vue';
 import { Api } from '@/utils/axios';
 import { formatDate } from '@/utils/date';
-import {useHead} from '@vueuse/head';
-
-defineComponent({
-   name: 'Admin',
-});
 
 useHead({
    title: 'Overtour — Админка'

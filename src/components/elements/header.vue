@@ -7,14 +7,9 @@
 </template>
 
 <script lang="ts" setup>
-import { defineComponent } from 'vue';
 import Logo from '@/components/elements/logo.vue';
 import FilterLine from '@/components/filter/line.vue';
 import UserDropdown from '@/components/auth/user-dropdown.vue';
-
-defineComponent({
-   name: 'MenuHeader'
-});
 </script>
 
 <style lang="scss">

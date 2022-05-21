@@ -3,4 +3,5 @@ dist
 dist-ssr
 *.local
 .idea
+.env
 package-lock.json

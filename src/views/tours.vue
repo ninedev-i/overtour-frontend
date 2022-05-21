@@ -36,7 +36,7 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, defineComponent, ref } from 'vue';
+import { computed, ref } from 'vue';
 import { useStore } from 'vuex';
 import { useHead } from '@vueuse/head';
 import { useRoute } from 'vue-router';
@@ -45,10 +45,6 @@ import Page from '@/components/elements/page.vue';
 import FilterSide from '@/components/filter/side.vue';
 import ListView from '@/components/tour/listView.vue';
 import TileView from '@/components/tour/tileView.vue';
-
-defineComponent({
-   name: 'ToursPage',
-});
 
 useHead({
    title: 'Overtour — Походы по России'

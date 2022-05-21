@@ -1,6 +1,5 @@
 {
-  "name": "overtour_frontend",
-  "version": "0.0.1",
+  "name": "overtour",
   "author": "Victor Vedenin",
   "scripts": {
     "dev": "node server",

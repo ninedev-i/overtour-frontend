@@ -20,12 +20,6 @@
 </template>
 
 <script lang="ts" setup>
-import { defineComponent } from 'vue';
-
-defineComponent({
-   name: 'PageContainer',
-});
-
 const props = defineProps({
    whitePage: {
       type: Boolean,
