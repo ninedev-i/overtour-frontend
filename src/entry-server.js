@@ -1,4 +1,4 @@
-import App from './app.vue';
+import App from './App.vue';
 import el from 'element-plus';
 import { createSSRApp } from 'vue';
 import { isPromise } from './utils';

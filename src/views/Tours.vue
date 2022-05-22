@@ -39,11 +39,11 @@
 import { computed, ref } from 'vue';
 import { useHead } from '@vueuse/head';
 import { useRoute } from 'vue-router';
-import MenuHeader from '@/components/elements/header.vue';
-import Page from '@/components/elements/page.vue';
-import FilterSide from '@/components/filter/side.vue';
-import ListView from '@/components/tour/listView.vue';
-import TileView from '@/components/tour/tileView.vue';
+import MenuHeader from '@/components/elements/Header.vue';
+import Page from '@/components/elements/Page.vue';
+import FilterSide from '@/components/filter/Side.vue';
+import ListView from '@/components/tour/ListView.vue';
+import TileView from '@/components/tour/TileView.vue';
 import { useToursStore } from '@/stores/tours';
 
 useHead({

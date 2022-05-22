@@ -51,8 +51,8 @@
 <script lang="ts" setup>
 import { useRoute } from 'vue-router';
 import { useHead } from '@vueuse/head';
-import MenuHeader from '@/components/elements/header.vue';
-import Page from '@/components/elements/page.vue';
+import MenuHeader from '@/components/elements/Header.vue';
+import Page from '@/components/elements/Page.vue';
 import { Api } from '@/utils/axios';
 import { formatDate } from '@/utils/date';
 

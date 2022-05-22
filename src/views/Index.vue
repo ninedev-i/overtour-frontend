@@ -8,7 +8,7 @@
 
 <script lang="ts" setup>
 import { useHead } from '@vueuse/head';
-import FilterLine from '@/components/filter/line.vue';
+import FilterLine from '@/components/filter/Line.vue';
 
 useHead({
    title: 'Overtour',

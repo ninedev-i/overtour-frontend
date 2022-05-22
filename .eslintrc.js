@@ -43,8 +43,9 @@ module.exports = {
       'lines-between-class-members': 0,
       'no-unused-expressions': 0,
       'no-unused-vars': 0,
-      'object-curly-spacing': 0,
+      'object-curly-spacing': ['warn', 'always'],
       'vue/singleline-html-element-content-newline': 0,
+      'vue/no-mutating-props': 1,
       'no-trailing-spaces': ['error', {}],
       'spaced-comment': ['warn'],
       'no-multi-spaces': ['warn'],
@@ -115,17 +116,6 @@ module.exports = {
       'vue/valid-template-root': 'off',
       'vue/html-indent': 'off',
       'vue/require-default-prop': 'off',
-      'vue/html-self-closing': [
-         'error',
-         {
-            html: {
-               void: 'always',
-               normal: 'never',
-               component: 'always'
-            },
-            svg: 'always',
-            math: 'always'
-         }
-      ]
+      'vue/html-self-closing': 'off'
    }
 };

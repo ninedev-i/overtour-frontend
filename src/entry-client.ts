@@ -1,4 +1,4 @@
-import App from './app.vue';
+import App from './App.vue';
 import el from 'element-plus';
 import { createApp } from 'vue';
 import { createHead } from '@vueuse/head';

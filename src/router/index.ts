@@ -12,10 +12,10 @@ export default function (/* store: any */) {
    return createRouter({
       history: routerHistory,
       routes: [
-         { path: '/', name: 'index', component: () => import('@/views/index.vue') },
-         { path: '/tours', name: 'tours', component: () => import('@/views/tours.vue') },
-         { path: '/tours/:id', name: 'tourInfo', component: () => import('@/views/tour.vue') },
-         { path: '/admin', name: 'admin', component: () => import('@/views/admin.vue'), beforeEnter: [adminGuard] },
+         { path: '/', name: 'index', component: () => import('@/views/Index.vue') },
+         { path: '/tours', name: 'tours', component: () => import('@/views/Tours.vue') },
+         { path: '/tours/:id', name: 'tourInfo', component: () => import('@/views/Tour.vue') },
+         { path: '/admin', name: 'admin', component: () => import('@/views/Admin.vue'), beforeEnter: [adminGuard] },
       ]
    });
 }

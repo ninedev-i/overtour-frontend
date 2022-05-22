@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia';
 import { ToursState } from './types';
-import {Api} from '@/utils/axios';
-import {formatDate} from '@/utils/date';
+import { Api } from '@/utils/axios';
+import { formatDate } from '@/utils/date';
 
 export const useToursStore = defineStore('tours', {
    state: (): ToursState => ({

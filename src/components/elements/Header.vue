@@ -7,9 +7,9 @@
 </template>
 
 <script lang="ts" setup>
-import Logo from '@/components/elements/logo.vue';
-import FilterLine from '@/components/filter/line.vue';
-import UserDropdown from '@/components/auth/user-dropdown.vue';
+import Logo from '@/components/elements/Logo.vue';
+import FilterLine from '@/components/filter/Line.vue';
+import UserDropdown from '@/components/auth/UserDropdown.vue';
 </script>
 
 <style lang="scss">

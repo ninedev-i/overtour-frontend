@@ -83,8 +83,8 @@
 <script lang="ts" setup>
 import { ref } from 'vue';
 import { useHead } from '@vueuse/head';
-import MenuHeader from '@/components/elements/header.vue';
-import Page from '@/components/elements/page.vue';
+import MenuHeader from '@/components/elements/Header.vue';
+import Page from '@/components/elements/Page.vue';
 import { Api } from '@/utils/axios';
 import { formatDate } from '@/utils/date';
 
@@ -124,7 +124,7 @@ const getData = async (clubId: number) => {
    tours.value = [];
    dataLoadingId.value = clubId;
    const data = await Api
-      .post('crawler/club_tours', {club: clubId})
+      .post('crawler/club_tours', { club: clubId })
       .then((res) => res.data);
 
    tours.value = data.tours;
@@ -138,7 +138,7 @@ const parseTour = async (tourInfo: IDraftData) => {
 
    return Api
       .post('crawler/tour_detail', { tourInfo })
-      .then(({data}) => {
+      .then(({ data }) => {
          tours.value = tours.value.slice(0).map((item) => {
             if (item && item.id === data.id) {
                item = data;

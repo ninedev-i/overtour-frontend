@@ -1,6 +1,7 @@
 {
   "name": "overtour",
   "author": "Victor Vedenin",
+  "license": "MIT",
   "scripts": {
     "dev": "node server",
     "build": "npm run build:client && npm run build:server",
