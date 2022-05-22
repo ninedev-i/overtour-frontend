@@ -1,10 +1,9 @@
 import App from './app.vue';
 import el from 'element-plus';
 import { createSSRApp } from 'vue';
-import createStore from './store/';
 import { isPromise } from './utils';
 import createRouter from './router/';
-import { sync } from 'vuex-router-sync';
+import createStores from './stores/';
 import ru from 'element-plus/lib/locale/lang/ru';
 import { renderToString } from '@vue/server-renderer';
 import { createHead, renderHeadToString } from '@vueuse/head';
@@ -38,9 +37,8 @@ function renderPreloadLink(file) {
 
 export async function render(url, manifest) {
    const head = createHead();
-   const store = createStore();
-   const router = createRouter(store);
-   sync(store, router);
+   const router = createRouter();
+   const store = createStores;
    const app = createSSRApp(App);
    app
       .use(head)
@@ -80,7 +78,7 @@ export async function render(url, manifest) {
       const { headTags } = renderHeadToString(head);
 
       const preloadLinks = renderPreloadLinks(ctx.modules, manifest);
-      const state = JSON.stringify(store.state);
+      const state = JSON.stringify(store.state.value);
       return [html, headTags, state, preloadLinks];
    } catch (error) {
       console.log(error);

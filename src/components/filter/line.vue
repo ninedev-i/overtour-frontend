@@ -29,7 +29,7 @@
          :fetch-suggestions="autocompleteRegions"
          class="filterLine_direction"
          placeholder="Куда"
-         @select="(selection) => store.commit('tour/setFilterRegion', selection.value)"
+         @select="(selection) => toursStore.filter.region = selection.value"
       />
 
       <el-button
@@ -45,25 +45,25 @@
 
 <script lang="ts" setup>
 import { computed, ref, watch } from 'vue';
-import { useStore } from 'vuex';
 import { useRouter } from 'vue-router';
+import { useToursStore } from '@/stores/tours';
 
-const store = useStore();
+const toursStore = useToursStore();
 const router = useRouter();
 
-if (!store.state.tour.regions.length) {
-   await store.dispatch('tour/getRegions');
+if (!toursStore.regions.length) {
+   await toursStore.getRegions();
 }
 
-const directions = store.state.tour.directions;
-const tags = computed(() => store.state.tour.filter.tags);
-const regions = computed(() => store.state.tour.regions);
-const region = ref(store.state.tour.filter.region);
-const period = ref(store.state.tour.filter.period);
+const directions = toursStore.directions;
+const tags = computed(() => toursStore.filter.tags);
+const regions = computed(() => toursStore.regions);
+const region = ref(toursStore.filter.region);
+const period = ref(toursStore.filter.period);
 const separator = computed(() => period.value?.length ? '—' : '');
 
 watch(period, () => {
-   store.commit('tour/setFilterPeriod', period.value);
+   toursStore.filter.period = period.value;
 });
 
 const autocompleteRegions = (searchString: string, cb: any) => {
@@ -74,7 +74,7 @@ const autocompleteRegions = (searchString: string, cb: any) => {
    };
 
    if (!searchString) {
-      store.commit('tour/setFilterRegion', null);
+      toursStore.filter.region = null;
    }
 
    const arr = filterRegions(searchString);
@@ -83,7 +83,7 @@ const autocompleteRegions = (searchString: string, cb: any) => {
 };
 
 const searchEvents = async () => {
-   await store.dispatch('tour/getTours');
+   await toursStore.getTours();
 
    if (router.currentRoute.value.path !== '/tours') {
       await router.push({ name: 'tours', params:  { previousPage: 'home' } });

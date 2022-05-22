@@ -1,23 +1,22 @@
 import App from './app.vue';
 import el from 'element-plus';
-import createStore from './store/';
 import { createApp } from 'vue';
 import { createHead } from '@vueuse/head';
 import { isPromise } from './utils';
 import createRouter from './router/';
-import { sync } from 'vuex-router-sync';
+import createStores from './stores/';
 import ru from 'element-plus/lib/locale/lang/ru';
 import 'element-plus/lib/theme-chalk/index.css';
 
 const head = createHead();
-const store = createStore();
+const store = createStores;
 const router = createRouter(/* store */);
-sync(store, router);
 
 const app = createApp(App);
 app
    .use(head)
    .use(store)
+   .use(createStores)
    .use(router)
    .use(el, { locale: ru, weekStart: 3 });
 
@@ -57,12 +56,12 @@ router.beforeResolve((to, from, next) => {
          next();
       });
    } catch (err) {
-      next(err);
+      next(err as any);
    }
 });
 
 if (window.__INITIAL_STATE__) {
-   store.replaceState(window.__INITIAL_STATE__);
+   store.state.value = window.__INITIAL_STATE__;
 }
 
 router.isReady().then(() => {

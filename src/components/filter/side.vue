@@ -60,25 +60,25 @@
 
 <script lang="ts" setup>
 import { computed, ref } from 'vue';
-import { useStore } from 'vuex';
+import { useToursStore } from '@/stores/tours';
 
 const props = defineProps({
    changeView: Function,
    view: String
 });
 
-const store = useStore();
+const toursStore = useToursStore();
 
 const duration = ref([1, 60]);
 const price = ref([0, 100000]);
-const isPriceChanged = computed(() => JSON.stringify(store.state.tour.filter.price) !== JSON.stringify(price.value));
-const isDurationChanged = computed(() => JSON.stringify(store.state.tour.filter.duration) !== JSON.stringify(duration.value));
+const isPriceChanged = computed(() => JSON.stringify(toursStore.filter.price) !== JSON.stringify(price.value));
+const isDurationChanged = computed(() => JSON.stringify(toursStore.filter.duration) !== JSON.stringify(duration.value));
 
 const searchEvents = async () => {
-   store.commit('tour/setFilterPrice', price.value);
-   store.commit('tour/setFilterDuration', duration.value);
+   toursStore.filter.price = price.value;
+   toursStore.filter.duration = duration.value;
 
-   await store.dispatch('tour/getTours');
+   await toursStore.getTours();
 };
 </script>
 

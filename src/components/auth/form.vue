@@ -26,9 +26,9 @@
 
 <script lang="ts" setup>
 import { ref } from 'vue';
-import { useStore } from 'vuex';
+import { useUserStore } from '@/stores/user';
 
-const store = useStore();
+const userStore = useUserStore();
 const auth = ref({
    email: '',
    password: '',
@@ -38,8 +38,8 @@ const isLogin = ref(true);
 const toggleIsLogin = () => isLogin.value = !isLogin.value;
 
 const register = () => {
-   store
-      .dispatch('user/register', {
+   userStore
+      .register({
          email: auth.value.email,
          password: auth.value.password,
          password_confirmation: auth.value.password,
@@ -48,7 +48,7 @@ const register = () => {
 };
 
 const login = () => {
-   store.dispatch('user/login', {
+   userStore.login({
       email: auth.value.email,
       password: auth.value.password,
    });

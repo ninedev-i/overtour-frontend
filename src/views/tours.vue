@@ -37,7 +37,6 @@
 
 <script lang="ts" setup>
 import { computed, ref } from 'vue';
-import { useStore } from 'vuex';
 import { useHead } from '@vueuse/head';
 import { useRoute } from 'vue-router';
 import MenuHeader from '@/components/elements/header.vue';
@@ -45,25 +44,26 @@ import Page from '@/components/elements/page.vue';
 import FilterSide from '@/components/filter/side.vue';
 import ListView from '@/components/tour/listView.vue';
 import TileView from '@/components/tour/tileView.vue';
+import { useToursStore } from '@/stores/tours';
 
 useHead({
    title: 'Overtour — Походы по России'
 });
 
-const store = useStore();
+const toursStore = useToursStore();
 const route = useRoute();
 const view = ref('tile');
-const tours = computed(() => store.state.tour.tours.data);
-const meta = computed(() => store.state.tour.tours.meta);
+const tours = computed(() => toursStore.tours.data);
+const meta = computed(() => toursStore.tours.meta);
 
 const currentPage = computed(() => meta.value.current_page);
 const handleCurrentChange = async (page: number) => {
-   store.commit('tour/setFilterPage', page);
-   await store.dispatch('tour/getTours');
+   toursStore.filter.page = page;
+   await toursStore.getTours();
 };
 
 if (route.params.previousPage !== 'home') {
-   await store.dispatch('tour/getTours');
+   await toursStore.getTours();
 }
 
 const toggleView = () => {
