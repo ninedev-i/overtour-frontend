@@ -8,21 +8,22 @@ export const useUserStore = defineStore('user', {
       email: null,
    }),
    actions: {
-      register(data: AuthData) {
+      register(data: AuthData): Promise<void> {
          return Api.post('register', data);
       },
 
-      login(loginData: AuthData) {
+      login(loginData: AuthData): Promise<string> {
          return Api
             .post('login', loginData)
             .then(({ data }) => {
                this.email = loginData.email;
                setToken(data.token);
+               return data.token;
             });
       },
 
-      logout() {
-         Api
+      logout(): Promise<void> {
+         return Api
             .post('logout')
             .then(() => {
                this.email = null;

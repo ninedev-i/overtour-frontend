@@ -5,4 +5,5 @@ export interface UserState {
 export interface AuthData {
    email: string;
    password: string;
+   password_confirmation?: string;
 }
