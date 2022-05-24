@@ -16,7 +16,6 @@ const app = createApp(App);
 app
    .use(head)
    .use(store)
-   .use(createStores)
    .use(router)
    .use(el, { locale: ru, weekStart: 3 });
 
