@@ -35,7 +35,7 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, defineEmits, reactive } from 'vue';
+import { ref, reactive } from 'vue';
 import { useUserStore } from '@/stores/user';
 
 const emit = defineEmits(['authorized']);

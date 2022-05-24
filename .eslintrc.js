@@ -116,6 +116,7 @@ module.exports = {
       'vue/valid-template-root': 'off',
       'vue/html-indent': 'off',
       'vue/require-default-prop': 'off',
-      'vue/html-self-closing': 'off'
+      'vue/html-self-closing': 'off',
+      'vue/multi-word-component-names': 'off'
    }
 };

@@ -1,11 +1,11 @@
 import App from './App.vue';
 import el from 'element-plus';
 import { createSSRApp } from 'vue';
+import { renderToString } from 'vue/server-renderer';
 import { isPromise } from './utils';
 import createRouter from './router/';
 import createStores from './stores/';
 import ru from 'element-plus/lib/locale/lang/ru';
-import { renderToString } from '@vue/server-renderer';
 import { createHead, renderHeadToString } from '@vueuse/head';
 
 function renderPreloadLinks(modules, manifest) {
