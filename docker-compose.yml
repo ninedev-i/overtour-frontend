@@ -1,0 +1,16 @@
+version: "3.3"
+
+services:
+  overtour_ru:
+    container_name: overtour_ru
+    restart: always
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "4000:80"
+    networks:
+      - overtour
+networks:
+  overtour:
+    external: true
