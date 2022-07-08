@@ -1,7 +1,7 @@
 <template>
    <div class="auth">
       <h1 class="auth-title">Overtour</h1>
-      <auth-form @authorized="redirect" />
+      <auth-form :type="route.params?.type" @authorized="redirect" />
    </div>
 </template>
 
@@ -17,7 +17,7 @@ useHead({
 });
 
 const redirect = (token: string) => {
-   const redirectUrl = route.query.redirect === 'food' ? `${import.meta.env.VITE_AUTH_REDIRECT}/auth?token=${token}` : '/';
+   const redirectUrl = route.query.redirect ? `${route.query.redirect}/auth?token=${token}` : '/';
    window.location.assign(redirectUrl);
 };
 

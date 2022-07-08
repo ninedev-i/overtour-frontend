@@ -30,17 +30,30 @@
             {{ isLogin ? 'Войти' : 'Зарегистрироваться' }}
          </el-button>
       </el-form-item>
-      <div class="authForm-toggle" @click="toggleIsLogin()">{{ isLogin ? 'Зарегистрироваться' : 'Войти' }}</div>
+      <RouterLink
+         class="authForm-toggle"
+         :to="`${type === 'login' ? route.fullPath.replace('login', 'register') : route.fullPath.replace('register', 'login')}`"
+      >
+         {{ isLogin ? 'Зарегистрироваться' : 'Войти' }}
+      </RouterLink>
    </el-form>
 </template>
 
 <script lang="ts" setup>
-import { ref, reactive } from 'vue';
+import { ref, reactive, computed } from 'vue';
 import { useUserStore } from '@/stores/user';
+import { useRoute } from 'vue-router';
 
+const route = useRoute();
+const props = defineProps({
+   type: {
+      type: String,
+      default: 'login'
+   },
+});
 const emit = defineEmits(['authorized']);
 const userStore = useUserStore();
-const isLogin = ref(true);
+const isLogin = computed(() => props.type === 'login');
 const ruleFormRef = ref();
 const auth = ref({
    email: '',
@@ -50,8 +63,6 @@ const rules = reactive({
    email: [{ required: true, message: 'Укажите почту', trigger: 'blur' }],
    password: [{ required: true, message: 'Укажите пароль', trigger: 'blur' }],
 });
-
-const toggleIsLogin = () => isLogin.value = !isLogin.value;
 
 const register = async () => {
    await ruleFormRef.value.validate((isValid: boolean) => {

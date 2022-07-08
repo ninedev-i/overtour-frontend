@@ -13,7 +13,7 @@ export default function (/* store: any */) {
       history: routerHistory,
       routes: [
          { path: '/', name: 'index', component: () => import('@/views/Index.vue') },
-         { path: '/auth', name: 'auth', component: () => import('@/views/Auth.vue') },
+         { path: '/auth/:type', name: 'auth', component: () => import('@/views/Auth.vue') },
          { path: '/tours', name: 'tours', component: () => import('@/views/Tours.vue') },
          { path: '/tours/:id', name: 'tourInfo', component: () => import('@/views/Tour.vue') },
          { path: '/admin', name: 'admin', component: () => import('@/views/Admin.vue'), beforeEnter: [adminGuard] },
