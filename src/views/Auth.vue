@@ -17,7 +17,7 @@ useHead({
 });
 
 const redirect = (token: string) => {
-   const redirectUrl = route.query.redirect ? `${route.query.redirect}/auth/${token}/` : '/';
+   const redirectUrl = route.query.redirect ? `${route.query.redirect}/auth-${token}/` : '/';
    window.location.assign(redirectUrl);
 };
 
