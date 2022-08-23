@@ -22,3 +22,18 @@ interface Direction {
    value: string;
    caption: string;
 }
+
+export interface TourInfo {
+   id: number;
+   title: string;
+   date_from: string;
+   date_to: string;
+   duration: string;
+   image: string;
+   description: string;
+   price: number;
+   link: string;
+   difficulty: number;
+   region: string;
+   tags: string;
+}

@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia';
-import { ToursState } from './types';
+import { TourInfo, ToursState } from './types';
 import { Api } from '@/utils/axios';
 import { formatDate } from '@/utils/date';
 
@@ -79,6 +79,12 @@ export const useToursStore = defineStore('tours', {
 
       setFilter(key: string, value: any) {
          this.filter = { ...this.filter, ...{ [key]: value } };
+      },
+
+      async getTourInfo(id: string): Promise<TourInfo> {
+         return Api
+            .get(`tour/${id}`)
+            .then(res => res.data);
       }
    }
 });
