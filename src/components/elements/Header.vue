@@ -3,7 +3,7 @@
       <logo />
       <filter-line :with-requests="true" />
       <user-dropdown />
-</header>
+   </header>
 </template>
 
 <script lang="ts" setup>

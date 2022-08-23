@@ -44,16 +44,12 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, ref, watch } from 'vue';
+import { computed, onMounted, ref, watch } from 'vue';
 import { useRouter } from 'vue-router';
 import { useToursStore } from '@/stores/tours';
 
 const toursStore = useToursStore();
 const router = useRouter();
-
-if (!toursStore.regions.length) {
-   await toursStore.getRegions();
-}
 
 const directions = toursStore.directions;
 const tags = computed(() => toursStore.filter.tags);
@@ -63,6 +59,12 @@ const period = ref(toursStore.filter.period);
 const separator = computed(() => period.value?.length ? '—' : '');
 
 watch(period, () => toursStore.setFilter('period', period.value));
+
+onMounted(() => {
+   if (!toursStore.regions.length) {
+      toursStore.getRegions();
+   }
+});
 
 const autocompleteRegions = (searchString: string, cb: any) => {
    const filterRegions = (queryString: string) => {
