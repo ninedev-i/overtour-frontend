@@ -56,14 +56,17 @@ export const useToursStore = defineStore('tours', {
             ? JSON.stringify(this.filter.duration)
             : null;
 
-         const params = {
+         const params: any = {
             page: this.filter.page,
-            tags: this.filter.tags,
             region: this.filter.region,
             price: filterPrice,
             duration: filterDuration,
             ...periodFilter
          };
+
+         if (this.filter.tags) {
+            params.tags = this.filter.tags;
+         }
 
          return Api
             .get('tour', { params })
@@ -73,5 +76,9 @@ export const useToursStore = defineStore('tours', {
                console.log(error);
             });
       },
+
+      setFilter(key: string, value: any) {
+         this.filter = { ...this.filter, ...{ [key]: value } };
+      }
    }
 });

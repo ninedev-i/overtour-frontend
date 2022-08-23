@@ -5,7 +5,7 @@
          :clearable="true"
          class="filterLine_type"
          placeholder="Вид похода"
-         @change="(value) => store.commit('tour/setFilterTags', value)"
+         @change="(value) => toursStore.setFilter('tags', value)"
       >
          <el-option
             v-for="(item, i) in directions"
@@ -29,7 +29,7 @@
          :fetch-suggestions="autocompleteRegions"
          class="filterLine_direction"
          placeholder="Куда"
-         @select="(selection) => toursStore.filter.region = selection.value"
+         @select="(selection) => toursStore.setFilter('region', selection.value)"
       />
 
       <el-button
@@ -62,13 +62,11 @@ const region = ref(toursStore.filter.region);
 const period = ref(toursStore.filter.period);
 const separator = computed(() => period.value?.length ? '—' : '');
 
-watch(period, () => {
-   toursStore.filter.period = period.value;
-});
+watch(period, () => toursStore.setFilter('period', period.value));
 
 const autocompleteRegions = (searchString: string, cb: any) => {
    const filterRegions = (queryString: string) => {
-      return (link: { value: string }) => {
+      return (link: any) => {
          return (link.value.toLowerCase().indexOf(queryString.toLowerCase()) === 0);
       };
    };
