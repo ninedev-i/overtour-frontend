@@ -17,6 +17,7 @@ export default function (/* store: any */) {
          { path: '/tours', name: 'tours', component: () => import('@/views/Tours.vue') },
          { path: '/tours/:id', name: 'tourInfo', component: () => import('@/views/Tour.vue') },
          { path: '/admin', name: 'admin', component: () => import('@/views/Admin.vue'), beforeEnter: [adminGuard] },
+         { path: '/:pathMatch(.*)*', component: () => import('@/views/NotFound.vue'), },
       ]
    });
 }

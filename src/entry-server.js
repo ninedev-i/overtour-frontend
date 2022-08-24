@@ -1,12 +1,6 @@
-import App from './App.vue';
-import el from 'element-plus';
-import { createSSRApp } from 'vue';
 import { renderToString } from 'vue/server-renderer';
-import { isPromise } from './utils';
-import createRouter from './router/';
-import createStores from './stores/';
-import ru from 'element-plus/lib/locale/lang/ru';
-import { createHead, renderHeadToString } from '@vueuse/head';
+import { renderHeadToString } from '@vueuse/head';
+import { _createApp } from './main';
 
 function renderPreloadLinks(modules, manifest) {
    let links = '';
@@ -36,49 +30,21 @@ function renderPreloadLink(file) {
 }
 
 export async function render(url, manifest) {
-   const head = createHead();
-   const router = createRouter();
-   const store = createStores;
-   const app = createSSRApp(App);
-   app
-      .use(head)
-      .use(store)
-      .use(router)
-      .use(el, { locale: ru });
+   const { app, head, router, store } = _createApp();
 
    router.push(url);
    try {
       await router.isReady();
-      const to = router.currentRoute;
-      const matchedRoute = to.value.matched;
-      if (to.value.matched.length === 0) {
-         return '';
+      const matchedComponents = router.currentRoute.value.matched;
+      if (!matchedComponents.length) {
+         new Error('404');
       }
-      const matchedComponents = [];
-      matchedRoute.map((route) => {
-         matchedComponents.push(...Object.values(route.components));
-      });
-      const asyncDataFuncs = matchedComponents.map((component) => {
-         const asyncData = component.asyncData || null;
-         if (asyncData) {
-            const config = {
-               store,
-               route: to
-            };
-            if (isPromise(asyncData) === false) {
-               const result = asyncData(config);
-               return Promise.resolve(result);
-            }
-            return asyncData(config);
-         }
-      });
-      await Promise.all(asyncDataFuncs);
       const ctx = {};
       const html = await renderToString(app, ctx);
       const { headTags } = renderHeadToString(head);
-
-      const preloadLinks = renderPreloadLinks(ctx.modules, manifest);
       const state = JSON.stringify(store.state.value);
+      const preloadLinks = renderPreloadLinks(ctx.modules, manifest);
+
       return [html, headTags, state, preloadLinks];
    } catch (error) {
       console.log(error);
