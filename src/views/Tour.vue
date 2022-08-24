@@ -41,7 +41,7 @@
             <div class="side_block-white">
                <div><b class="tour_additional_info">Начало:</b> {{ formatDate(tour.date_from).format('D MMMM YYYY') }}</div>
                <div><b class="tour_additional_info">Конец:</b> {{ formatDate(tour.date_to).format('D MMMM YYYY') }}</div>
-               <div><b class="tour_additional_info">Стоимость:</b> {{ triads(tour.price) }} ₽</div>
+               <div><b class="tour_additional_info">Стоимость:</b> {{ toTriads(tour.price) }} ₽</div>
             </div>
          </template>
       </page>
@@ -55,7 +55,7 @@ import { useHead } from '@vueuse/head';
 import MenuHeader from '@/components/elements/Header.vue';
 import Page from '@/components/elements/Page.vue';
 import { useToursStore } from '@/stores/tours';
-import { formatDate } from '@/utils/date';
+import { formatDate, toTriads } from '@/utils';
 
 const route = useRoute();
 const tourStore = useToursStore();
@@ -82,11 +82,6 @@ const plan = [
       content: `Content`
    },
 ];
-
-const triads = (sum: number) => {
-   const output = sum + '';
-   return output.replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 ');
-};
 </script>
 
 <style lang="scss">

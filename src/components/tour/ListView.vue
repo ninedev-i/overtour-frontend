@@ -27,14 +27,14 @@
          <div v-else>{{ formatDate(props.tour.date_from).format('D.MM.YYYY') }} – {{ formatDate(props.tour.date_to).format('D.MM.YYYY') }}</div>
          <hr />
          <div class="listView__label">Стоимость:</div>
-         <div>{{ triads(props.tour.price) }} ₽ {{ getPricePerDay(props.tour.price, props.tour.duration) }}</div>
+         <div>{{ toTriads(props.tour.price) }} ₽ {{ getPricePerDay(props.tour.price, props.tour.duration) }}</div>
       </div>
    </router-link>
 </template>
 
 <script lang="ts" setup>
 import { computed } from 'vue';
-import { formatDate } from '@/utils/date';
+import { formatDate, toTriads } from '@/utils';
 
 const props = defineProps({
    tour: {
@@ -52,13 +52,8 @@ const declOfNum = (number: number) => {
    return ['день', 'дня', 'дней'][(number % 100 > 4 && number % 100 < 20)? 2 : cases[(number % 10 < 5) ? number % 10 :5]];
 };
 
-const triads = (amount: number) => {
-   const val = amount + '';
-   return val.replace(/(\d{1,3})(?=((\d{3})*([^\d]|$)))/g, ' $1 ');
-};
-
 const getPricePerDay = (price: number, days: number): string => {
-   return days > 1 ? `(${triads(Math.round(price / days))} ₽ в день)` : '';
+   return days > 1 ? `(${toTriads(Math.round(price / days))} ₽ в день)` : '';
 };
 </script>
 

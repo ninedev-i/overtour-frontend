@@ -85,8 +85,7 @@ import { ref } from 'vue';
 import { useHead } from '@vueuse/head';
 import MenuHeader from '@/components/elements/Header.vue';
 import Page from '@/components/elements/Page.vue';
-import { Api } from '@/utils/axios';
-import { formatDate } from '@/utils/date';
+import { Api, formatDate } from '@/utils';
 
 useHead({
    title: 'Overtour — Админка'

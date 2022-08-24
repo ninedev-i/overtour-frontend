@@ -11,14 +11,14 @@
          <div class="tileView__dates">
             {{ period(props.tour.date_from, props.tour.date_to) }} ({{ props.tour.duration }} {{ declOfNum(props.tour.duration) }})
          </div>
-         <div class="tileView__price">{{ triads(props.tour.price) }} ₽</div>
+         <div class="tileView__price">{{ toTriads(props.tour.price) }} ₽</div>
       </div>
    </router-link>
 </template>
 
 <script lang="ts" setup>
 import { computed } from 'vue';
-import { period } from '@/utils/date';
+import { period, toTriads } from '@/utils';
 
 const props = defineProps({
    tour: {
@@ -34,11 +34,6 @@ const isClosed = computed((): boolean => {
 const declOfNum = (number: number) => {
    let cases = [2, 0, 1, 1, 1, 2];
    return ['день', 'дня', 'дней'][(number % 100 > 4 && number % 100 < 20)? 2 : cases[(number % 10 < 5) ? number % 10 :5]];
-};
-
-const triads = (amount: number) => {
-   const val = amount + '';
-   return val.replace(/(\d{1,3})(?=((\d{3})*([^\d]|$)))/g, ' $1 ').trim();
 };
 </script>
 

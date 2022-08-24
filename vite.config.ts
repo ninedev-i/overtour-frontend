@@ -1,8 +1,8 @@
 import { UserConfig } from 'vite';
 import eslintPlugin from 'vite-plugin-eslint';
 import svgLoader from 'vite-svg-loader';
-const path = require('path');
-const vuePlugin = require('@vitejs/plugin-vue');
+import vuePlugin from '@vitejs/plugin-vue';
+import path from 'path';
 
 export default {
    port: 80,
