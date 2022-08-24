@@ -22,6 +22,7 @@
          class="filterLine_date"
          type="daterange"
          start-placeholder="Когда"
+         @change="toursStore.setFilter('period', period)"
       />
 
       <el-autocomplete
@@ -44,7 +45,7 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, onMounted, ref, watch } from 'vue';
+import { computed, onMounted, ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { useToursStore } from '@/stores/tours';
 
@@ -57,8 +58,6 @@ const regions = computed(() => toursStore.regions);
 const region = ref(toursStore.filter.region);
 const period = ref(toursStore.filter.period);
 const separator = computed(() => period.value?.length ? '—' : '');
-
-watch(period, () => toursStore.setFilter('period', period.value));
 
 onMounted(() => {
    if (!toursStore.regions.length) {
@@ -74,7 +73,7 @@ const autocompleteRegions = (searchString: string, cb: any) => {
    };
 
    if (!searchString) {
-      toursStore.filter.region = null;
+      toursStore.setFilter('region', null);
    }
 
    const arr = filterRegions(searchString);

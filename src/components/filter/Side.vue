@@ -69,14 +69,14 @@ const props = defineProps({
 
 const toursStore = useToursStore();
 
-const duration = ref([1, 60]);
-const price = ref([0, 100000]);
+const duration = ref(toursStore.filter.duration);
+const price = ref(toursStore.filter.price);
 const isPriceChanged = computed(() => JSON.stringify(toursStore.filter.price) !== JSON.stringify(price.value));
 const isDurationChanged = computed(() => JSON.stringify(toursStore.filter.duration) !== JSON.stringify(duration.value));
 
 const searchEvents = async () => {
-   toursStore.filter.price = price.value;
-   toursStore.filter.duration = duration.value;
+   toursStore.setFilter('price', price.value);
+   toursStore.setFilter('duration', duration.value);
 
    await toursStore.getTours();
 };

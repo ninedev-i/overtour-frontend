@@ -6,7 +6,10 @@ import { formatDate } from '@/utils/date';
 export const useToursStore = defineStore('tours', {
    state: (): ToursState => ({
       regions: [],
-      tours: [],
+      tours: {
+         meta: {},
+         data: []
+      },
       filter: {
          page: 1,
          period: [],

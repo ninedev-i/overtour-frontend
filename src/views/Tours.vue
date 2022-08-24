@@ -18,7 +18,7 @@
                   class="tours-pagination"
                   hide-on-single-page
                   layout="prev, pager, next"
-                  @current-change="handleCurrentChange"
+                  @current-change="changePage"
                />
 
                <div v-if="!tours || !tours.length" class="tours-listEmpty">
@@ -53,12 +53,12 @@ useHead({
 const toursStore = useToursStore();
 const route = useRoute();
 const view = ref('tile');
-const tours = computed(() => toursStore.tours.data);
-const meta = computed(() => toursStore.tours.meta);
+const tours = computed(() => toursStore.tours?.data);
+const meta = computed(() => toursStore.tours?.meta);
 
-const currentPage = computed(() => meta.value.current_page);
-const handleCurrentChange = async (page: number) => {
-   toursStore.filter.page = page;
+const currentPage = computed(() => meta.value?.current_page);
+const changePage = async (page: number) => {
+   toursStore.setFilter('page', page);
    await toursStore.getTours();
 };
 
