@@ -36,7 +36,7 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, ref } from 'vue';
+import { computed, onMounted, ref } from 'vue';
 import { useHead } from '@vueuse/head';
 import { useRoute } from 'vue-router';
 import MenuHeader from '@/components/elements/Header.vue';
@@ -62,9 +62,11 @@ const changePage = async (page: number) => {
    await toursStore.getTours();
 };
 
-if (route.params.previousPage !== 'home') {
-   await toursStore.getTours();
-}
+onMounted(async () => {
+   if (route.params.previousPage !== 'home') {
+      await toursStore.getTours();
+   }
+});
 
 const toggleView = () => {
    view.value = view.value === 'list' ? 'tile' : 'list';
