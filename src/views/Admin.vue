@@ -25,7 +25,9 @@
                   stripe
                   style="width: 100%"
                   empty-text="Тут пусто"
+                  @selection-change="handleSelectionChange"
                >
+                  <el-table-column type="selection" width="55" />
                   <el-table-column
                      type="index"
                      label="№"
@@ -106,12 +108,17 @@ interface IReport {
    broken: number;
 }
 
+const selection = ref<IDraftData[]>([]);
 const tours = ref<IDraftData[]>([]);
 const report = ref<IReport>({
    found: 0,
    unique: 0,
    broken: 0,
 });
+
+const handleSelectionChange = (val: IDraftData[]) => {
+   selection.value = val;
+};
 
 const dataLoadingId = ref<number|null|'all'>(null);
 
