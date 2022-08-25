@@ -14,7 +14,7 @@
                <el-pagination
                   v-model:currentPage="currentPage"
                   :page-size="40"
-                  :total="meta.total"
+                  :total="meta.total || 0"
                   class="tours-pagination"
                   hide-on-single-page
                   layout="prev, pager, next"
@@ -56,7 +56,7 @@ const view = ref('tile');
 const tours = computed(() => toursStore.tours?.data);
 const meta = computed(() => toursStore.tours?.meta);
 
-const currentPage = computed(() => meta.value?.current_page);
+const currentPage = computed(() => meta.value?.current_page || 1);
 const changePage = async (page: number) => {
    toursStore.setFilter('page', page);
    await toursStore.getTours();
