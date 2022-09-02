@@ -14,8 +14,11 @@
   "dependencies": {
     "@vueuse/head": "^0.7.6",
     "axios": "^0.27.2",
+    "cookie-parser": "^1.4.6",
     "dayjs": "^1.11.2",
+    "dotenv": "^16.0.1",
     "element-plus": "^1.0.2-beta.71",
+    "http-proxy-middleware": "^2.0.6",
     "pinia": "^2.0.14",
     "vue": "^3.2.36",
     "vue-router": "^4.0.15"
@@ -33,7 +36,7 @@
     "sass": "^1.52.1",
     "typescript": "^4.6.4",
     "vite": "^2.9.13",
-    "vite-svg-loader": "^3.4.0",
-    "vite-plugin-eslint": "^1.6.1"
+    "vite-plugin-eslint": "^1.6.1",
+    "vite-svg-loader": "^3.4.0"
   }
 }

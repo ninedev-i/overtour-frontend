@@ -161,7 +161,7 @@ const parseAllData = async (clubId: number) => {
 
 const showAllDrafts = async (): Promise<void> => {
    dataLoadingId.value = 'all';
-   tours.value = await Api.get('drafts').then(res => res.data);
+   tours.value = await Api.get('drafts').then(res => res.data.data);
    dataLoadingId.value = null;
 };
 </script>

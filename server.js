@@ -2,6 +2,11 @@ const fs = require('fs');
 const path = require('path');
 const express = require('express');
 const axios = require('axios');
+const { createProxyMiddleware } = require('http-proxy-middleware');
+const dotenv = require('dotenv');
+const cookieParser = require('cookie-parser');
+
+dotenv.config();
 
 axios.defaults.adapter = require('axios/lib/adapters/http');
 
@@ -13,6 +18,7 @@ async function createServer(root = process.cwd(), isProd = isProduction) {
    const manifest = isProd ? require('./dist/client/ssr-manifest.json') : {};
 
    const app = express();
+   app.use(cookieParser());
 
    let vite;
    if (!isProd) {
@@ -33,6 +39,19 @@ async function createServer(root = process.cwd(), isProd = isProduction) {
          })
       );
    }
+
+   app.use('/api/*', createProxyMiddleware({
+      target: process.env.VITE_SERVICE_URL,
+      changeOrigin: true,
+      onProxyRes: (proxyRes, req, res) => {
+         proxyRes.on('data', (data) => {
+            data = JSON.parse(data.toString('utf-8'));
+            if (data.token) {
+               res.cookie('token', data.token);
+            }
+         });
+      }
+   }));
 
    app.use('*', async (req, res) => {
       try {

@@ -34,7 +34,7 @@ export const useUserStore = defineStore('user', {
       getUserInfo(): Promise<any> {
          return new Promise(resolve => {
             if (!isAuthenticated()) {
-               resolve({});
+               return resolve({});
             }
             Api.get('user')
                .then(({ data }) => {

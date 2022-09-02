@@ -12,7 +12,7 @@ const isSSR = typeof window === 'undefined';
 export const _createApp = () => {
    const head = createHead();
    const store = createStores;
-   const router = createRouter(/* store */);
+   const router = createRouter();
 
    const app = (isSSR ? createSSRApp : createApp)(App);
    app

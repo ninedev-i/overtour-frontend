@@ -1,5 +1,7 @@
+import { getCookie, setCookie } from '@/utils';
+
 export const getToken = () => {
-   let token = localStorage?.getItem('token');
+   const token = getCookie('token');
    if (!token) {
       return null;
    }
@@ -9,6 +11,6 @@ export const getToken = () => {
 
 export const isAuthenticated = () => !!getToken();
 
-export const setToken = (token: string) => localStorage.setItem('token', token);
+export const setToken = (token: string) => setCookie('token', token);
 
 export const destroyToken = () => localStorage.removeItem('token');

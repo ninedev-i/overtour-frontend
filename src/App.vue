@@ -8,6 +8,17 @@
    </router-view>
 </template>
 
+<script lang="ts" setup>
+import { onMounted } from 'vue';
+import { useUserStore } from '@/stores/user';
+
+const userStore = useUserStore();
+
+onMounted(() => {
+   userStore.getUserInfo();
+});
+</script>
+
 <style lang="scss">
 @import url('https://fonts.googleapis.com/css?family=Open+Sans&display=swap');
 
