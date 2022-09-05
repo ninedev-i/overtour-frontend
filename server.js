@@ -45,8 +45,8 @@ async function createServer(root = process.cwd(), isProd = isProduction) {
       changeOrigin: true,
       onProxyRes: (proxyRes, req, res) => {
          proxyRes.on('data', (data) => {
-            data = JSON.parse(data.toString('utf-8'));
-            if (data.token) {
+            if (req.url === 'api/login') {
+               data = JSON.parse(data.toString('utf-8'));
                res.cookie('token', data.token);
             }
          });
